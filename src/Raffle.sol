@@ -54,6 +54,7 @@ contract Raffle{
     function enterRaffle() external payable{
         // Logic for entering the raffle
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
+        
         if(msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
 
         
