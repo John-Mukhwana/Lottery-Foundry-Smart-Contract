@@ -13,7 +13,8 @@ pragma solidity 0.8.30;
 
 
 contract Raffle{
-    
+
+    uint256 public entranceFee;
     function enterRaffle() public{
         // Logic for entering the raffle
 
