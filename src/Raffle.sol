@@ -20,7 +20,7 @@ contract Raffle{
         i_entranceFee = entranceFee;
     }
     
-    function enterRaffle() public{
+    function enterRaffle() public payable{
         // Logic for entering the raffle
 
     }
