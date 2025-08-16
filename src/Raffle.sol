@@ -39,7 +39,10 @@ pragma solidity 0.8.30;
 
 
 contract Raffle{
-    
+
+    /*Errors*/
+    error Raffle_NotEnoughEthSent();
+
     /*state Variaable*/
     uint256 private immutable i_entranceFee;
 
@@ -51,6 +54,9 @@ contract Raffle{
     function enterRaffle() external payable{
         // Logic for entering the raffle
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
+        if(msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
+
+        
     }
 
     function pickWinner() public {}
