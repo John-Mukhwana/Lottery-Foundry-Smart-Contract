@@ -13,7 +13,11 @@ pragma solidity 0.8.30;
 
 
 contract Raffle{
-    function enterRaffle() public{}
+    
+    function enterRaffle() public{
+        // Logic for entering the raffle
+
+    }
 
     function pickWinner() public {}
 }
