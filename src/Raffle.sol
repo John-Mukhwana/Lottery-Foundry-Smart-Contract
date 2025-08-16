@@ -48,9 +48,9 @@ contract Raffle{
     }
 
     /*External And Public Functions*/
-    function enterRaffle() public payable{
+    function enterRaffle() external payable{
         // Logic for entering the raffle
-
+        require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
     }
 
     function pickWinner() public {}
