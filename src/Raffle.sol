@@ -12,4 +12,8 @@ pragma solidity 0.8.30;
  */
 
 
-contract Raffle{}
+contract Raffle{
+    function enterRaffle() public{}
+
+    function pickWinner() public {}
+}
