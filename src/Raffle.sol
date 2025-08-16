@@ -13,13 +13,15 @@ pragma solidity 0.8.30;
 
 
 contract Raffle{
-
-    uint256 public i_entranceFee;
+    
+    /*state Variaable*/
+    uint256 private immutable i_entranceFee;
 
     constructor(uint256 entranceFee) {
         i_entranceFee = entranceFee;
     }
-    
+
+    /*External And Public Functions*/
     function enterRaffle() public payable{
         // Logic for entering the raffle
 
@@ -27,10 +29,15 @@ contract Raffle{
 
     function pickWinner() public {}
 
-   /*Getter Functions*/
+   /**
+    * Getter Functions
+    * View and Pure Functions
+    */
    function getEntranceFee() external view returns (uint256) {
        return i_entranceFee;
    }
 
    
+
+
 }
