@@ -19,7 +19,7 @@ contract Raffle{
     constructor(uint256 entranceFee) {
         i_entranceFee = entranceFee;
     }
-
+    
     function enterRaffle() public{
         // Logic for entering the raffle
 
