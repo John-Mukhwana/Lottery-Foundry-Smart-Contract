@@ -48,6 +48,9 @@ contract Raffle{
 
     address payable[] private s_players;
 
+    /*Events*/
+    event EnteredRaffle(address indexed player);
+
     constructor(uint256 entranceFee) {
         i_entranceFee = entranceFee;
     }
