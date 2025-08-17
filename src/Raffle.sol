@@ -58,8 +58,7 @@ contract Raffle{
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
         
         if(msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
-
-        
+        s_players.push(payable(msg.sender));
     }
 
     function pickWinner() public {}
