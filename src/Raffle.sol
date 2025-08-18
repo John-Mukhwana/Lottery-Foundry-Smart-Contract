@@ -45,7 +45,6 @@ contract Raffle{
 
     /*state Variaable*/
     uint256 private immutable i_entranceFee;
-
     address payable[] private s_players;
 
     /*Events*/
