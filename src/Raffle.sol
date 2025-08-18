@@ -74,7 +74,7 @@ contract Raffle{
     //3. Be automatically called after the interval
     function pickWinner() external {
         //check to see if enough time has passed
-        if(block.timestamp-s_lastTimeStamp < i_interval) revert();
+        if(block.timestamp - s_lastTimeStamp < i_interval) revert();
     }
 
    /**
