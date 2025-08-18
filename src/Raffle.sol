@@ -45,10 +45,12 @@ contract Raffle{
 
     /*state Variaable*/
     uint256 private immutable i_entranceFee;
+    //@dev Duration of the lottery in seconds
+    uint256 private immutable i_interval;
     address payable[] private s_players;
 
     /*Events*/
-    event EnteredRaffle(address indexed player);
+    event RaffleEntered(address indexed player);
 
     constructor(uint256 entranceFee) {
         i_entranceFee = entranceFee;
@@ -61,7 +63,7 @@ contract Raffle{
         
         if(msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
         s_players.push(payable(msg.sender));
-        emit EnteredRaffle(msg.sender)
+        emit RaffleEntered(msg.sender);
     }
 
     function pickWinner() public {}
