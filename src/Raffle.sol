@@ -68,8 +68,10 @@ contract Raffle{
         s_players.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
     }
-
-    function pickWinner() public {}
+    
+    //1. Get a random number
+    //2. Use random number to pick a winner
+    function pickWinner() external {}
 
    /**
     * Getter Functions
