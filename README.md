@@ -19,44 +19,29 @@ https://book.getfoundry.sh/
 
 ## Raffle Contract Structure
 
-```solidity
-contract Raffle {
-	// Errors
-	error Raffle_NotEnoughEthSent();
+```
+// Layout of the contract file:
+// version
+// imports
+// errors
+// interfaces, libraries, contract
 
-	// State Variables
-	uint256 private immutable i_entranceFee;
-	uint256 private immutable i_interval;
-	address payable[] private s_players;
-	uint256 private s_lastTimeStamp;
+// Inside Contract:
+// Type declarations
+// State variables
+// Events
+// Modifiers
+// Functions
 
-	// Events
-	event RaffleEntered(address indexed player);
-
-	// Constructor
-	constructor(uint256 entranceFee, uint256 interval) {
-		i_entranceFee = entranceFee;
-		i_interval = interval;
-		s_lastTimeStamp = block.timestamp;
-	}
-
-	// Enter Raffle
-	function enterRaffle() external payable {
-		if (msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
-		s_players.push(payable(msg.sender));
-		emit RaffleEntered(msg.sender);
-	}
-
-	// Pick Winner
-	function pickWinner() external {
-		if (block.timestamp - s_lastTimeStamp < i_interval) revert();
-	}
-
-	// Getter
-	function getEntranceFee() external view returns (uint256) {
-		return i_entranceFee;
-	}
-}
+// Layout of Functions:
+// constructor
+// receive function (if exists)
+// fallback function (if exists)
+// external
+// public
+// internal
+// private
+// view & pure functions
 ```
 
 ---

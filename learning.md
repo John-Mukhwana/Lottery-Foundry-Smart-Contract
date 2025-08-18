@@ -9,33 +9,31 @@
 
 ### Raffle Contract
 - Structure: Errors, State Variables, Events, Constructor, Functions
-- Example:
++- Example Structure:
 
-```solidity
-contract Raffle {
-	error Raffle_NotEnoughEthSent();
-	uint256 private immutable i_entranceFee;
-	uint256 private immutable i_interval;
-	address payable[] private s_players;
-	uint256 private s_lastTimeStamp;
-	event RaffleEntered(address indexed player);
-	constructor(uint256 entranceFee, uint256 interval) {
-		i_entranceFee = entranceFee;
-		i_interval = interval;
-		s_lastTimeStamp = block.timestamp;
-	}
-	function enterRaffle() external payable {
-		if (msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
-		s_players.push(payable(msg.sender));
-		emit RaffleEntered(msg.sender);
-	}
-	function pickWinner() external {
-		if (block.timestamp - s_lastTimeStamp < i_interval) revert();
-	}
-	function getEntranceFee() external view returns (uint256) {
-		return i_entranceFee;
-	}
-}
+```
+// Layout of the contract file:
+// version
+// imports
+// errors
+// interfaces, libraries, contract
+
+// Inside Contract:
+// Type declarations
+// State variables
+// Events
+// Modifiers
+// Functions
+
+// Layout of Functions:
+// constructor
+// receive function (if exists)
+// fallback function (if exists)
+// external
+// public
+// internal
+// private
+// view & pure functions
 ```
 
 ### Foundry Commands
