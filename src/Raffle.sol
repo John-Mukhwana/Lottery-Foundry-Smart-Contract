@@ -48,6 +48,7 @@ contract Raffle{
     //@dev Duration of the lottery in seconds
     uint256 private immutable i_interval;
     address payable[] private s_players;
+    uint256 private s_lastTimeStamp;
 
     /*Events*/
     event RaffleEntered(address indexed player);
