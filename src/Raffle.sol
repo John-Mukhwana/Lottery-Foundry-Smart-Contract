@@ -53,8 +53,9 @@ contract Raffle{
     /*Events*/
     event RaffleEntered(address indexed player);
 
-    constructor(uint256 entranceFee) {
+    constructor(uint256 entranceFee,uint256 interval) {
         i_entranceFee = entranceFee;
+        i_interval = interval;
     }
 
     /*External And Public Functions*/
