@@ -72,7 +72,10 @@ contract Raffle{
     //1. Get a random number
     //2. Use random number to pick a winner
     //3. Be automatically called after the interval
-    function pickWinner() external {}
+    function pickWinner() external {
+        //check to see if enough time has passed
+        if(block.timestamp-s_lastTimeStamp < i_interval) revert();
+    }
 
    /**
     * Getter Functions
