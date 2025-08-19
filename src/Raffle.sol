@@ -59,7 +59,7 @@ contract Raffle{
         s_lastTimeStamp = block.timestamp;
     }
 
-    /*External And Public Functions*/
+    /*External And Public Functions */
     function enterRaffle() external payable{
         // Logic for entering the raffle
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
@@ -72,6 +72,9 @@ contract Raffle{
     //1. Get a random number
     //2. Use random number to pick a winner
     //3. Be automatically called after the interval
+    /**
+     * @dev This function can only be called after the interval has passed
+     */
     function pickWinner() external {
         //check to see if enough time has passed
         if(block.timestamp - s_lastTimeStamp < i_interval) revert();
