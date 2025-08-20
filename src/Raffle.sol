@@ -79,7 +79,7 @@ contract Raffle{
         //check to see if enough time has passed
         if(block.timestamp - s_lastTimeStamp < i_interval) revert();
 
-        //Get our random number
+        //Get our random number 2.5
     }
 
    /**
