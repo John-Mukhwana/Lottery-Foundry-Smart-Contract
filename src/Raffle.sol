@@ -48,6 +48,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /*Chainlinkn VRF Variables*/
     uint256 private immutable i_subscriptionId;
     bytes32 private immutable i_keyHash;
+    uint32 private immutable i_callbackGasLimit;
+    uint16 private constant REQUEST_CONFIRMATIONS = 3;
+    uint32 private constant NUM_WORDS = 1;
 
 
     /*Events*/
