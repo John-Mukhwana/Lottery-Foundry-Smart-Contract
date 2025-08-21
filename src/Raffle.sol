@@ -41,7 +41,7 @@ import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/V
  */
 
 
-contract Raffle {
+contract Raffle is VRFConsumerBaseV2Plus {
 
     /*Errors*/
     error Raffle_NotEnoughEthSent();
