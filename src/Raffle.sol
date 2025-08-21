@@ -52,24 +52,22 @@ contract Raffle is VRFConsumerBaseV2Plus {
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private constant NUM_WORDS = 1;
 
-
     /*Events*/
     event RaffleEntered(address indexed player);
 
     constructor(
-        uint256 entranceFee, 
-        uint256 interval, 
-        address vrfCoordinator, 
-        uint256 subscriptionId, 
+        uint256 entranceFee,
+        uint256 interval,
+        address vrfCoordinator,
+        uint256 subscriptionId,
         bytes32 gasLane, //i_keyHash
         uint32 callbackGasLimit
-        ) 
-    VRFConsumerBaseV2Plus(vrfCoordinator) {
+    ) VRFConsumerBaseV2Plus(vrfCoordinator) {
         i_entranceFee = entranceFee;
         i_interval = interval;
         s_lastTimeStamp = block.timestamp;
         i_subscriptionId = subscriptionId;
-        i_keyHash =gasLane;
+        i_keyHash = gasLane;
         i_callbackGasLimit = callbackGasLimit;
     }
 
@@ -94,6 +92,19 @@ contract Raffle is VRFConsumerBaseV2Plus {
         if (block.timestamp - s_lastTimeStamp < i_interval) revert();
 
         //Get our random number 2.5
+        VRFV2PlusClient.RandomWordsRequest memory request = VRFV2PlusClient.RandomWordsRequest({
+            keyHash: i_keyHash,
+            subId: i_subscriptionId,
+            requestConfirmations: REQUEST_CONFIRMATIONS,
+            callbackGasLimit: i_callbackGasLimit,
+            numWords: NUM_WORDS,
+            extraArgs: VRFV2PlusClient._argsToBytes(
+                // Set nativePayment to true to pay for VRF requests with Sepolia ETH insteadof LINK
+                VRFV2PlusClient.ExtraArgsV1({nativePayment: false})
+            )
+        });
+
+        uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
     /**
