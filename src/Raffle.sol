@@ -45,13 +45,21 @@ contract Raffle is VRFConsumerBaseV2Plus {
     address payable[] private s_players;
     uint256 private s_lastTimeStamp;
 
+    /*Chainlinkn VRF Variables*/
+    uint256 private immutable i_subscriptionId;
+    bytes32 private immutable i_keyHash;
+
+
     /*Events*/
     event RaffleEntered(address indexed player);
 
-    constructor(uint256 entranceFee, uint256 interval, address vrfCoordinator) VRFConsumerBaseV2Plus(vrfCoordinator) {
+    constructor(uint256 entranceFee, uint256 interval, address vrfCoordinator, uint256 subscriptionId, bytes32 gasLane, bytes32 keyHash) 
+    VRFConsumerBaseV2Plus(vrfCoordinator) {
         i_entranceFee = entranceFee;
         i_interval = interval;
         s_lastTimeStamp = block.timestamp;
+        i_subscriptionId = subscriptionId;
+        i_keyHash =gasLane;
     }
 
     /*External And Public Functions */
