@@ -56,7 +56,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /*Events*/
     event RaffleEntered(address indexed player);
 
-    constructor(uint256 entranceFee,uint256 interval) {
+    constructor(uint256 entranceFee,uint256 interval,address vrfCoordinator) 
+    VRFConsumerBaseV2Plus(vrfCoordinator) {
         i_entranceFee = entranceFee;
         i_interval = interval;
         s_lastTimeStamp = block.timestamp;
