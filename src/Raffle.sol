@@ -38,6 +38,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /*Errors*/
     error Raffle__SendMoreToEnterRaffle();
     error Raffle__TransferFailed();
+    error Raffle__RaffleNotOpen();
 
     /*Type Declarations*/
     enum RaffleState {
@@ -90,7 +91,11 @@ contract Raffle is VRFConsumerBaseV2Plus {
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
 
         if (msg.value < i_entranceFee) revert Raffle__SendMoreToEnterRaffle();
-        if (s_raffleState != RaffleState.OPEN) revert Raffle__RaffleNotOpen();
+        
+        if (s_raffleState != RaffleState.OPEN) revert {
+            Raffle__RaffleNotOpen();
+        }
+
         s_players.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
     }
