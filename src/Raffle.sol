@@ -131,7 +131,6 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     //CEI: Checks, Effects, Interactions
     function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
-        // Logic for fulfilling the random words request
 
         //Effect (Internal Contract State)
         uint256 indexOfWinner = randomWords[0] % s_players.length;
@@ -148,7 +147,6 @@ contract Raffle is VRFConsumerBaseV2Plus {
         revert Raffle__TransferFailed();
        }
 
-       emit WinnerPicked(s_recentWinner);
     }
 
     /**
