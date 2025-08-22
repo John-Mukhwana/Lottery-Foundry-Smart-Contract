@@ -91,7 +91,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
 
         if (msg.value < i_entranceFee) revert Raffle__SendMoreToEnterRaffle();
-        
+
         if (s_raffleState != RaffleState.OPEN) revert {
             Raffle__RaffleNotOpen();
         }
@@ -108,8 +108,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
      */
     function pickWinner() external {
         //check to see if enough time has passed
-        if (block.timestamp - s_lastTimeStamp < i_interval) revert();
+        if (block.timestamp - s_lastTimeStamp < i_interval) revert Raffle__RaffleNotOpen();
 
+        s_raffleState = RaffleState.CALCULATING;
         //Get our random number 2.5
         VRFV2PlusClient.RandomWordsRequest memory request = VRFV2PlusClient.RandomWordsRequest({
             keyHash: i_keyHash,
