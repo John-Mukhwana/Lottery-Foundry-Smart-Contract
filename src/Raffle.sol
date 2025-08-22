@@ -140,6 +140,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
         s_players = new address payable[](0);
         s_lastTimeStamp = block.timestamp;
+        emit WinnerPicked(s_recentWinner);
 
         //Interactions (External Contract Interactions)
        (bool success,) = recentWinner.call{value: address(this).balance}("");
