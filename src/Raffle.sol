@@ -39,6 +39,12 @@ contract Raffle is VRFConsumerBaseV2Plus {
     error Raffle_NotEnoughEthSent();
     error Raffle__TransferFailed();
 
+    /*Type Declarations*/
+    enum RaffleState {
+        OPEN,
+        CALCULATING
+    }
+
     /*state Variaable*/
     uint256 private immutable i_entranceFee;
     //@dev Duration of the lottery in seconds
@@ -54,7 +60,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     uint32 private immutable i_callbackGasLimit;
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private constant NUM_WORDS = 1;
-
+     
+    
     /*Events*/
     event RaffleEntered(address indexed player);
 
