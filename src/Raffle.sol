@@ -51,7 +51,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     uint256 private immutable i_interval;
     address payable[] private s_players;
     uint256 private s_lastTimeStamp;
-    adress private s_recentWinner;
+    address private s_recentWinner;
+    RaffleState private s_raffleState;
 
 
     /*Chainlinkn VRF Variables*/
@@ -79,6 +80,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
         i_subscriptionId = subscriptionId;
         i_keyHash = gasLane;
         i_callbackGasLimit = callbackGasLimit;
+
+        s_raffleState = RaffleState.OPEN;
     }
 
     /*External And Public Functions */
