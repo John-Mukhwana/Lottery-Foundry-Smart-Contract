@@ -79,7 +79,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         i_subscriptionId = subscriptionId;
         i_keyHash = gasLane;
         i_callbackGasLimit = callbackGasLimit;
-        
+
         s_lastTimeStamp = block.timestamp;
         s_raffleState = RaffleState.OPEN;
     }
@@ -89,7 +89,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
         // Logic for entering the raffle
         // require(msg.value >= i_entranceFee, "Not Enough ETH sent!");
 
-        if (msg.value < i_entranceFee) revert Raffle_NotEnoughEthSent();
+        if (msg.value < i_entranceFee) revert Raffle__SendMoreToEnterRaffle();
+        if (s_raffleState != RaffleState.OPEN) revert Raffle__RaffleNotOpen();
         s_players.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
     }
