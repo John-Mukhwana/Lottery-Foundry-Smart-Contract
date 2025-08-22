@@ -37,6 +37,7 @@ import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/V
 contract Raffle is VRFConsumerBaseV2Plus {
     /*Errors*/
     error Raffle_NotEnoughEthSent();
+    error Raffle__TransferFailed();
 
     /*state Variaable*/
     uint256 private immutable i_entranceFee;
@@ -115,7 +116,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
         address payable recentWinner = s_players[indexOfWinner];
        s_recentWinner = recentWinner;
        (bool success,) = recentWinner.call{value: address(this).balance}("");
-       
+       if(!success){
+        revert();
+       }
     }
 
     /**
