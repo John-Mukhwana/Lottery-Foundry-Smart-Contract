@@ -76,11 +76,11 @@ contract Raffle is VRFConsumerBaseV2Plus {
     ) VRFConsumerBaseV2Plus(vrfCoordinator) {
         i_entranceFee = entranceFee;
         i_interval = interval;
-        s_lastTimeStamp = block.timestamp;
         i_subscriptionId = subscriptionId;
         i_keyHash = gasLane;
         i_callbackGasLimit = callbackGasLimit;
-
+        
+        s_lastTimeStamp = block.timestamp;
         s_raffleState = RaffleState.OPEN;
     }
 
