@@ -44,6 +44,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     uint256 private immutable i_interval;
     address payable[] private s_players;
     uint256 private s_lastTimeStamp;
+    adress private s_recentWinner;
+
 
     /*Chainlinkn VRF Variables*/
     uint256 private immutable i_subscriptionId;
@@ -109,6 +111,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
     function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
         // Logic for fulfilling the random words request
+        uint256 indexOfWinner = randomWords[0] % s_players.length;
+        address payable recentWinner = s_players[indexOfWinner];
+       s_recentWinner = recentWinner;
     }
 
     /**
