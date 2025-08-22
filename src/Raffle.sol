@@ -134,7 +134,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
         s_recentWinner = recentWinner;
         s_raffleState = RaffleState.OPEN;
 
-        
+        s_players = new address payable[](0);
+        s_lastTimeStamp = block.timestamp;
+
        (bool success,) = recentWinner.call{value: address(this).balance}("");
        if(!success){
         revert Raffle__TransferFailed();
