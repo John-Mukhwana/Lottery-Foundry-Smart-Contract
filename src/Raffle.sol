@@ -107,6 +107,10 @@ contract Raffle is VRFConsumerBaseV2Plus {
         uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
+    function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
+        // Logic for fulfilling the random words request
+    }
+
     /**
      * Getter Functions
      * View and Pure Functions
