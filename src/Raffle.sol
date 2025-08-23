@@ -39,7 +39,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     error Raffle__SendMoreToEnterRaffle();
     error Raffle__TransferFailed();
     error Raffle__RaffleNotOpen();
-    error Raffle__UpkeepNotNeeded
+    error Raffle__UpkeepNotNeeded(address balance, uint256 length, uint256 raffleState);
 
     /*Type Declarations*/
     enum RaffleState {
