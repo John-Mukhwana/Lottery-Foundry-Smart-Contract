@@ -104,7 +104,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * @dev This function can only be called after the interval has passed
      */
-    function  performUpkeep() external {
+    function  performUpkeep(bytes calldata /*performData*/ ) external {
         //check to see if enough time has passed
         if (block.timestamp - s_lastTimeStamp < i_interval) revert Raffle__RaffleNotOpen();
 
