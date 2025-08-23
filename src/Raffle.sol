@@ -141,7 +141,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
         returns (bool upkeepNeeded, bytes memory /* performData */ )
     {
         bool isOpen = RaffleState.OPEN == s_raffleState;
-        
+        bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
+
 
     }
 
