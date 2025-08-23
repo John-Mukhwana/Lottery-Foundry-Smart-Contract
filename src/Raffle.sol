@@ -134,6 +134,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
      * 3. The contract has ETH.
      * 4. There are players registered.
      * 5. Implicitly, your subscription is funded with LINK.
+     * @param -ignored
      */
     function checkUpkeep(bytes calldata /*checkData*/ )
         public
