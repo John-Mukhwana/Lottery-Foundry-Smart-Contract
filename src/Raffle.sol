@@ -55,15 +55,13 @@ contract Raffle is VRFConsumerBaseV2Plus {
     address private s_recentWinner;
     RaffleState private s_raffleState;
 
-
     /*Chainlinkn VRF Variables*/
     uint256 private immutable i_subscriptionId;
     bytes32 private immutable i_keyHash;
     uint32 private immutable i_callbackGasLimit;
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
     uint32 private constant NUM_WORDS = 1;
-     
-    
+
     /*Events*/
     event RaffleEntered(address indexed player);
 
@@ -94,7 +92,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
         if (msg.value < i_entranceFee) revert Raffle__SendMoreToEnterRaffle();
 
-        if (s_raffleState != RaffleState.OPEN) revert Raffle__RaffleNotOpen(); 
+        if (s_raffleState != RaffleState.OPEN) revert Raffle__RaffleNotOpen();
 
         s_players.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
@@ -128,17 +126,22 @@ contract Raffle is VRFConsumerBaseV2Plus {
     }
 
     /**
- * @dev This is the function that the Chainlink Keeper nodes call
- * they look for `upkeepNeeded` to return True.
- * the following should be true for this to return true:
- * 1. The time interval has passed between raffle runs.
- * 2. The lottery is open.
- * 3. The contract has ETH.
- * 4. There are players registered.
- * 5. Implicitly, your subscription is funded with LINK.
- */
-
-    function checkUpkeep(bytes calldata /*checkData*/) public view returns (bool upkeepNeeded, bytes memory /* performData */) {
+     * @dev This is the function that the Chainlink Keeper nodes call
+     * they look for `upkeepNeeded` to return True.
+     * the following should be true for this to return true:
+     * 1. The time interval has passed between raffle runs.
+     * 2. The lottery is open.
+     * 3. The contract has ETH.
+     * 4. There are players registered.
+     * 5. Implicitly, your subscription is funded with LINK.
+     */
+    function checkUpkeep(bytes calldata /*checkData*/ )
+        public
+        view
+        returns (bool upkeepNeeded, bytes memory /* performData */ )
+    {
+        bool isOpen = RaffleState.OPEN == s_raffleState;
+        
 
     }
 
@@ -156,11 +159,10 @@ contract Raffle is VRFConsumerBaseV2Plus {
         emit WinnerPicked(s_recentWinner);
 
         //Interactions (External Contract Interactions)
-       (bool success,) = recentWinner.call{value: address(this).balance}("");
-       if(!success){
-        revert Raffle__TransferFailed();
-       }
-
+        (bool success,) = recentWinner.call{value: address(this).balance}("");
+        if (!success) {
+            revert Raffle__TransferFailed();
+        }
     }
 
     /**
