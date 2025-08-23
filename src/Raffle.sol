@@ -105,7 +105,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * @dev This function can only be called after the interval has passed
      */
-    function performUpkeep(bytes calldata /*performData*/) external override {
+    function performUpkeep(bytes calldata /*performData*/) external{
         (bool upkeepNeeded, ) = checkUpkeep("");
         // require(upkeepNeeded, "Upkeep not needed");
 
@@ -119,13 +119,20 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
         s_raffleState = RaffleState.CALCULATING;
 
-        uint256 requestId = i_vrfCoordinator.requestRandomWords(
-            i_gasLane,
-            i_subscriptionId,
-            REQUEST_CONFIRMATIONS,
-            i_callbackGasLimit,
-            NUM_WORDS
-        );
+               //Get our random number 2.5
+        VRFV2PlusClient.RandomWordsRequest memory request = VRFV2PlusClient.RandomWordsRequest({
+            keyHash: i_keyHash,
+            subId: i_subscriptionId,
+            requestConfirmations: REQUEST_CONFIRMATIONS,
+            callbackGasLimit: i_callbackGasLimit,
+            numWords: NUM_WORDS,
+            extraArgs: VRFV2PlusClient._argsToBytes(
+                // Set nativePayment to true to pay for VRF requests with Sepolia ETH insteadof LINK
+                VRFV2PlusClient.ExtraArgsV1({nativePayment: false})
+            )
+        });
+
+        uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
     /**
@@ -138,8 +145,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
      * 4. There are players registered.
      * 5. Implicitly, your subscription is funded with LINK.
      * @param -ignored
-     * @return UpkeepNeeded - true if it's time to restart lottery
-     * @return -ignored
+     * @return upkeepNeeded True if it's time to restart lottery
+     * @return performData Additional data (ignored)
      */
     function checkUpkeep(
         bytes calldata /*checkData*/
