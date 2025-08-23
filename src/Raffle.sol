@@ -130,7 +130,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
     }
 
     function checkUpkeep(bytes calldata /*checkData*/) public view returns (bool upkeepNeeded, bytes memory /* performData */)
-    {}
+    {
+        
+    }
 
     //CEI: Checks, Effects, Interactions
     function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
