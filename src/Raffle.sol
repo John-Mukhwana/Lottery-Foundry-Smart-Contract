@@ -135,6 +135,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
      * 4. There are players registered.
      * 5. Implicitly, your subscription is funded with LINK.
      * @param -ignored
+     * @return UpkeepNeeded - true if it's time
+     * @return -ignored
      */
     function checkUpkeep(bytes calldata /*checkData*/ )
         public
