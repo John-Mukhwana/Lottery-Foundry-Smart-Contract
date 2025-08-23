@@ -94,9 +94,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
 
         if (msg.value < i_entranceFee) revert Raffle__SendMoreToEnterRaffle();
 
-        if (s_raffleState != RaffleState.OPEN) revert {
-            Raffle__RaffleNotOpen();
-        }
+        if (s_raffleState != RaffleState.OPEN) revert Raffle__RaffleNotOpen(); 
 
         s_players.push(payable(msg.sender));
         emit RaffleEntered(msg.sender);
@@ -129,9 +127,19 @@ contract Raffle is VRFConsumerBaseV2Plus {
         uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
-    function checkUpkeep(bytes calldata /*checkData*/) public view returns (bool upkeepNeeded, bytes memory /* performData */)
-    {
-        
+    /**
+ * @dev This is the function that the Chainlink Keeper nodes call
+ * they look for `upkeepNeeded` to return True.
+ * the following should be true for this to return true:
+ * 1. The time interval has passed between raffle runs.
+ * 2. The lottery is open.
+ * 3. The contract has ETH.
+ * 4. There are players registered.
+ * 5. Implicitly, your subscription is funded with LINK.
+ */
+
+    function checkUpkeep(bytes calldata /*checkData*/) public view returns (bool upkeepNeeded, bytes memory /* performData */) {
+
     }
 
     //CEI: Checks, Effects, Interactions
