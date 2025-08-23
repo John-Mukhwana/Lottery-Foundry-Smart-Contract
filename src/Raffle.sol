@@ -129,7 +129,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         uint256 requestId = s_vrfCoordinator.requestRandomWords(request);
     }
 
-    function checkUpkeep(bytes calldata /*checkData*/)
+    function checkUpkeep(bytes calldata /*checkData*/) public
 
     //CEI: Checks, Effects, Interactions
     function fulfillRandomWords(uint256 requestId, uint256[] calldata randomWords) internal override {
