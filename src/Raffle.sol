@@ -105,7 +105,16 @@ contract Raffle is VRFConsumerBaseV2Plus {
      * @dev This function can only be called after the interval has passed
      */
     function  performUpkeep(bytes calldata /*performData*/ ) external override{
-          (bool upkeepNeeded, ) = checkUpkeep("");
+        (bool upkeepNeeded, ) = checkUpkeep("");
+        // require(upkeepNeeded, "Upkeep not needed");
+
+        if (!upkeepNeeded) {
+            revert Raffle__UpkeepNotNeeded(
+                address(this).balance,
+                s_players.length,
+                uint256(s_raffleState)
+        );
+       }
 
         s_raffleState = RaffleState.CALCULATING;
         //Get our random number 2.5
