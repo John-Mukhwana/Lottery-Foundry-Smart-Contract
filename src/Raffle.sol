@@ -104,9 +104,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * @dev This function can only be called after the interval has passed
      */
-    function  performUpkeep(bytes calldata /*performData*/ ) external {
-        //check to see if enough time has passed
-        if (block.timestamp - s_lastTimeStamp < i_interval) revert Raffle__RaffleNotOpen();
+    function  performUpkeep(bytes calldata /*performData*/ ) external override{
+          (bool upkeepNeeded, ) = checkUpkeep("");
 
         s_raffleState = RaffleState.CALCULATING;
         //Get our random number 2.5
