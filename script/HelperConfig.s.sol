@@ -13,4 +13,8 @@ contract HelperConfig is Script {
         uint32 callbackGasLimit;
         uint256 subscriptionId;
     }
+    
+    NetworkConfig public localNetworkConfig;
+    mapping(uint256 => NetworkConfig) public networkConfigs;
+
 }
