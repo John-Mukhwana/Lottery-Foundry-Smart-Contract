@@ -2,8 +2,11 @@
 
 pragma solidity 0.8.19;
 
-import {Script} from "forge-std/Script.sol";
-
+import {Script} from "forge-std/Script.sol";abstract contract CodeConstants {
+    uint256 public constant ETH_SEPOLIA_CHAIN_ID = 11155111;
+    uint256 public constant LOCAL_CHAIN_ID = 31337;
+    uint256 public constant BASE_SEPOLIA_CHAIN_ID = 84531;
+}
 contract HelperConfig is Script {
     struct NetworkConfig{
         uint256 entranceFee;
@@ -18,6 +21,9 @@ contract HelperConfig is Script {
     mapping(uint256 => NetworkConfig) public networkConfigs;
     
     constructor() {
+    networkConfigs[ETH_SEPOLIA_CHAIN_ID] = getSepoliaEthConfig();
+     networkConfigs[84532] = getBaseSepoliaEthConfig();
+    }
         function getSepoliaEthConfig() public pure returns(NetworkConfig memory){
             return NetworkConfig({
                 entranceFee: 0.01 ether,//1e16
@@ -30,6 +36,8 @@ contract HelperConfig is Script {
         }
     }
 
+    
+
     function getLocalConfig() public pure returns(NetworkConfig memory){
         return NetworkConfig({
             entranceFee: 0.01 ether,
@@ -40,4 +48,3 @@ contract HelperConfig is Script {
             subscriptionId: 0
         });
     }
-}
