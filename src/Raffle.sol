@@ -105,8 +105,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
     /**
      * @dev This function can only be called after the interval has passed
      */
-    function performUpkeep(bytes calldata /*performData*/) external{
-        (bool upkeepNeeded, ) = checkUpkeep("");
+    function performUpkeep(bytes calldata performData) external{
+        (bool upkeepNeeded, ) = checkUpkeep(performData);
         // require(upkeepNeeded, "Upkeep not needed");
 
         if (!upkeepNeeded) {
@@ -156,7 +156,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
         bool hasPlayers = s_players.length > 0;
         bool hasBalance = address(this).balance > 0;
         upkeepNeeded = (timePassed && isOpen && hasBalance && hasPlayers);
-        return (upkeepNeeded, "0x0");
+        return (upkeepNeeded, hex"00");
     }
 
     //CEI: Checks, Effects, Interactions
