@@ -7,7 +7,10 @@ import {Script} from "forge-std/Script.sol";abstract contract CodeConstants {
     uint256 public constant LOCAL_CHAIN_ID = 31337;
     uint256 public constant BASE_SEPOLIA_CHAIN_ID = 84531;
 }
-contract HelperConfig is Script {
+
+
+contract HelperConfig is CodeConstants Script {
+    error HelperConfig__InvalidChainId();
     struct NetworkConfig{
         uint256 entranceFee;
         uint256 interval;
@@ -21,10 +24,20 @@ contract HelperConfig is Script {
     mapping(uint256 => NetworkConfig) public networkConfigs;
     
     constructor() {
-    networkConfigs[ETH_SEPOLIA_CHAIN_ID] = getSepoliaEthConfig();
-     networkConfigs[84532] = getBaseSepoliaEthConfig();
+     networkConfigs[ETH_SEPOLIA_CHAIN_ID] = getSepoliaEthConfig();
+     networkConfigs[BASE_SEPOLIA_CHAIN_ID] = getBaseSepoliaEthConfig();
     }
-        function getSepoliaEthConfig() public pure returns(NetworkConfig memory){
+
+    function getConfigByChainId(uint256 chainId) public returns (NetworkConfig memory) {
+    if (networkConfigs[chainId].vrfCoordinator != address(0)) {
+        return networkConfigs[chainId];
+    } else if (chainId == LOCAL_CHAIN_ID) {
+        return getOrCreateAnvilEthConfig();
+    } else {
+        revert HelperConfig__InvalidChainId();
+    }
+}
+    function getSepoliaEthConfig() public pure returns(NetworkConfig memory){
             return NetworkConfig({
                 entranceFee: 0.01 ether,//1e16
                 interval: 30,// 30 seconds
@@ -34,9 +47,6 @@ contract HelperConfig is Script {
                 subscriptionId: 0
             });
         }
-    }
-
-    
 
     function getLocalConfig() public pure returns(NetworkConfig memory){
         return NetworkConfig({
@@ -48,3 +58,10 @@ contract HelperConfig is Script {
             subscriptionId: 0
         });
     }
+
+  function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
+    // Check to see if we set an active network localNetworkConfig
+    if (localNetworkConfig.vrfCoordinator != address(0)) {
+        return localNetworkConfig;
+}  
+}
