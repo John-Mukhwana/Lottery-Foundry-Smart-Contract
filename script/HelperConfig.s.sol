@@ -16,5 +16,12 @@ contract HelperConfig is Script {
     
     NetworkConfig public localNetworkConfig;
     mapping(uint256 => NetworkConfig) public networkConfigs;
-
+    
+    constructor() {
+        function getSepoliaEthConfig() public pure returns(NetworkConfig memory){
+            return NetworkConfig({
+                
+            })
+        }
+    }
 }
