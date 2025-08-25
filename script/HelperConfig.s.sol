@@ -71,17 +71,15 @@ contract HelperConfig is CodeConstants, Script {
         if (localNetworkConfig.vrfCoordinator != address(0)) {
             return localNetworkConfig;
         }
+
+        //Deploy Mocks and such
+        vm.startBroadcast();
+
+        VRFCoordinatorV2_5Mock vrfCoordinatorMock = new VRFCoordinatorV2_5Mock(
+            MOCK_BASE_FEE,
+            MOCK_GAS_PRICE_LINK,
+            MOCK_WEI_PER_UNIT_LINK
+        );
+        vm.stopBroadcast();
     }
-
-    //Deploy Mocks and such
-    vm.startBroadcast();
-    
-    VRFCoordinatorV2_5Mock vrfCoordinatorMock = new VRFCoordinatorV2_5Mock(
-        MOCK_BASE_FEE,
-        MOCK_GAS_PRICE_LINK,
-        MOCK_WEI_PER_UNIT_LINK
-    );
-    
-    v
-
 }
