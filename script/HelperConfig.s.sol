@@ -9,7 +9,7 @@ import {Script} from "forge-std/Script.sol";abstract contract CodeConstants {
 }
 
 
-contract HelperConfig is CodeConstants Script {
+contract HelperConfig is CodeConstants, Script {
     error HelperConfig__InvalidChainId();
     struct NetworkConfig{
         uint256 entranceFee;
@@ -36,7 +36,8 @@ contract HelperConfig is CodeConstants Script {
     } else {
         revert HelperConfig__InvalidChainId();
     }
-}
+    
+    }
     function getSepoliaEthConfig() public pure returns(NetworkConfig memory){
             return NetworkConfig({
                 entranceFee: 0.01 ether,//1e16
@@ -47,6 +48,7 @@ contract HelperConfig is CodeConstants Script {
                 subscriptionId: 0
             });
         }
+    
 
     function getLocalConfig() public pure returns(NetworkConfig memory){
         return NetworkConfig({
@@ -63,5 +65,6 @@ contract HelperConfig is CodeConstants Script {
     // Check to see if we set an active network localNetworkConfig
     if (localNetworkConfig.vrfCoordinator != address(0)) {
         return localNetworkConfig;
-}  
+ }  
+}
 }
