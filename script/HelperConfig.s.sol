@@ -76,5 +76,12 @@ contract HelperConfig is CodeConstants, Script {
     //Deploy Mocks and such
     vm.startBroadcast();
     
+    VRFCoordinatorV2_5Mock vrfCoordinatorMock = new VRFCoordinatorV2_5Mock(
+        MOCK_BASE_FEE,
+        MOCK_GAS_PRICE_LINK,
+        MOCK_WEI_PER_UNIT_LINK
+    );
+    
+    v
 
 }
