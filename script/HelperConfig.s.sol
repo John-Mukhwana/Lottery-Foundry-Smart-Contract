@@ -74,5 +74,7 @@ contract HelperConfig is CodeConstants, Script {
     }
 
     //Deploy Mocks and such
+    vm.startBroadcast();
+    
 
 }
