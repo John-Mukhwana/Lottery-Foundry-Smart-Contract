@@ -27,6 +27,6 @@ contract RaffleTest is Test {
         HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
         entranceFee = config.entranceFee;
         interval = config.interval;
-        
+        vrfCoordinator = config.vrfCoordinator;
     }
 }
