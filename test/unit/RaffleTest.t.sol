@@ -28,5 +28,6 @@ contract RaffleTest is Test {
         entranceFee = config.entranceFee;
         interval = config.interval;
         vrfCoordinator = config.vrfCoordinator;
+        gasLane = config.gasLane;
     }
 }
