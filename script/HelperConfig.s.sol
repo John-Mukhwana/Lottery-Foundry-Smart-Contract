@@ -64,6 +64,22 @@ contract HelperConfig is CodeConstants, Script {
             });
     }
 
+    function getBaseSepoliaEthConfig()
+        public
+        pure
+        returns (NetworkConfig memory)
+    {
+        return
+            NetworkConfig({
+                entranceFee: 0.01 ether,
+                interval: 30,
+                vrfCoordinator: address(0), // Replace with actual address if needed
+                gasLane: "",
+                callbackGasLimit: 500000,
+                subscriptionId: 0
+            });
+    }
+
     function getLocalConfig() public pure returns (NetworkConfig memory) {
         return
             NetworkConfig({
