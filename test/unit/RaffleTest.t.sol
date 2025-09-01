@@ -24,5 +24,6 @@ contract RaffleTest is Test {
     function setUp() external {
         DeployRaffle deployer = new DeployRaffle();
         (raffle, helperConfig) = deployer.deployContract();
+        HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
     }
 }
