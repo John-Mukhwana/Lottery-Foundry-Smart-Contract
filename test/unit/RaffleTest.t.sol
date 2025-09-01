@@ -26,5 +26,7 @@ contract RaffleTest is Test {
         (raffle, helperConfig) = deployer.deployContract();
         HelperConfig.NetworkConfig memory config = helperConfig.getConfig();
         entranceFee = config.entranceFee;
+        interval = config.interval;
+        
     }
 }
