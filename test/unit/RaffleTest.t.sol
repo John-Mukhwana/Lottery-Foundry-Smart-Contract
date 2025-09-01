@@ -30,5 +30,8 @@ contract RaffleTest is Test {
         vrfCoordinator = config.vrfCoordinator;
         gasLane = config.gasLane;
         callbackGasLimit = config.callbackGasLimit;
+        subscriptionId = config.subscriptionId;
     }
+
+    
 }
