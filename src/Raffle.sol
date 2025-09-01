@@ -54,7 +54,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     address payable[] private s_players;
     uint256 private s_lastTimeStamp;
     address private s_recentWinner;
-    RaffleState private s_raffleState;
+    RaffleState private s_raffleState; // start as open -> this is after strting to write Tests
 
     /*Chainlinkn VRF Variables*/
     uint256 private immutable i_subscriptionId;
