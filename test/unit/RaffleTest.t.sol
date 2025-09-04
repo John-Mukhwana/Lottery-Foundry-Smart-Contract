@@ -76,7 +76,7 @@ contract RaffleTest is Test {
         // Arrange
         vm.prank(PLAYER);
         raffle.enterRaffle{value: entranceFee}();
-        vm.warp(block.timestamp + interval + 1);
+        vm.warp(block.timestamp + interval + 1); //time in seconds i.e interval seconds +1 second
         vm.roll(block.number + 1);
         raffle.performUpkeep("");
         // Act / Assert
