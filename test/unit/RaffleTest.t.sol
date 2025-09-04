@@ -20,6 +20,7 @@ contract RaffleTest is Test {
 
     address public PLAYER = makeAddr("player");
     uint256 public constant STARTING_PLAYER_BALANCE = 10 ether;
+    
 
     function setUp() external {
         DeployRaffle deployer = new DeployRaffle();
@@ -64,7 +65,7 @@ contract RaffleTest is Test {
 
         // Act / Assert
         vm.expectEmit(true, false, false, false, address(raffle));
-        emit EnteredRaffle(PLAYER);
+        emit RaffleEntered(PLAYER);
         raffle.enterRaffle{value: entranceFee}();
     }
 }
