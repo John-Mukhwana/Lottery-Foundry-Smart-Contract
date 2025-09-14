@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {Script} from "forge-std/Script.sol";
+import {Script,console} from "forge-std/Script.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
 
 contract CreateSubscription is Script {
@@ -13,6 +13,7 @@ contract CreateSubscription is Script {
 
     function createSubscription(address vrfCoordinator) public returns (uint64) {
         //create subscription
+        console.log("Creating subscription on chain ID: ", block.chainid);
     }
 
     function run() external returns (uint64) {
