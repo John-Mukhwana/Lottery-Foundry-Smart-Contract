@@ -12,7 +12,7 @@ contract CreateSubscription is Script {
         createSubscription(vrfCoordinator);    
     }
 
-    function createSubscription(address vrfCoordinator) public returns (uint64) {
+    function createSubscription(address vrfCoordinator) public returns (uint256,address) {
         //create subscription
         console.log("Creating subscription on chain ID: ", block.chainid);
         vm.startBroadcast();
@@ -20,7 +20,7 @@ contract CreateSubscription is Script {
         vm.stopBroadcast();
 
         console.log("Your subscription ID is: ", subId);
-        console.log
+        console.log("Please update the subscriptionId in the HelperConfig.s.sol file");
     }
 
     function run() external returns (uint64) {
