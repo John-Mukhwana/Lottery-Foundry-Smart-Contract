@@ -7,11 +7,10 @@ import {HelperConfig} from "./HelperConfig.s.sol";
 contract CreateSubscription is Script {
     function createSubscriptionUsingConfig() public returns (uint64) {
         HelperConfig helperConfig = new HelperConfig();
-        address vrfCoordinator = helperConfig.getConfig().vrfCoordinator;
-
-        //create subscription
+        address vrfCoordinator = helperConfig.getConfig().vrfCoordinator; 
+        createSubscription(vrfCoordinator);    
     }
-    
+
     function createSubscription(address vrfCoordinator) public returns (uint64) {
         //create subscription
     }
