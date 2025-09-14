@@ -7,7 +7,7 @@ contract CreateSubscription is Script {
     function createSubscriptionUsingConfig() public returns (uint64) {
 
     }
-    function run() pulic{
-        
+    function run() external returns (uint64) {
+        return createSubscriptionUsingConfig();n 
     }
 }
