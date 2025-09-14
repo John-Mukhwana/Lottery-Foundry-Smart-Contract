@@ -3,6 +3,7 @@ pragma solidity ^0.8.19;
 
 import {Script,console} from "forge-std/Script.sol";
 import {HelperConfig} from "./HelperConfig.s.sol";
+import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 
 contract CreateSubscription is Script {
     function createSubscriptionUsingConfig() public returns (uint64) {
@@ -15,7 +16,7 @@ contract CreateSubscription is Script {
         //create subscription
         console.log("Creating subscription on chain ID: ", block.chainid);
         vm.startBroadcast();
-        
+        uint256 subId = 
     }
 
     function run() external returns (uint64) {
