@@ -14,6 +14,8 @@ contract CreateSubscription is Script {
     function createSubscription(address vrfCoordinator) public returns (uint64) {
         //create subscription
         console.log("Creating subscription on chain ID: ", block.chainid);
+        vm.startBroadcast();
+        
     }
 
     function run() external returns (uint64) {
