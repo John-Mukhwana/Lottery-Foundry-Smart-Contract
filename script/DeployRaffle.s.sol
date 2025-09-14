@@ -15,6 +15,12 @@ contract DeployRaffle is Script {
         //local -> deploy mocks,get local config
         //sepolia -> get sepolia config
         HelperConfig.NetworkConfig memory config=helperConfig.getConfig();
+        
+        if (config.subscriptionId == 0) {
+            // create subscription
+            // fund subscription
+            // config.subscriptionId = subscriptionId;
+        }
 
         vm.startBroadcast();
 
