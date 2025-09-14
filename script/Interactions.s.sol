@@ -9,7 +9,8 @@ contract CreateSubscription is Script {
     function createSubscriptionUsingConfig() public returns (uint64) {
         HelperConfig helperConfig = new HelperConfig();
         address vrfCoordinator = helperConfig.getConfig().vrfCoordinator; 
-        createSubscription(vrfCoordinator);    
+        createSubscription(vrfCoordinator);
+        return (subId,vrfCoordinator);  
     }
 
     function createSubscription(address vrfCoordinator) public returns (uint256,address) {
@@ -21,6 +22,7 @@ contract CreateSubscription is Script {
 
         console.log("Your subscription ID is: ", subId);
         console.log("Please update the subscriptionId in the HelperConfig.s.sol file");
+        return (subId,vrfCoordinator);
     }
 
     function run() external returns (uint64) {
