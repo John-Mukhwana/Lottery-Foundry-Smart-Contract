@@ -6,10 +6,10 @@ import {HelperConfig} from "./HelperConfig.s.sol";
 import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 
 contract CreateSubscription is Script {
-    function createSubscriptionUsingConfig() public returns (uint64) {
+    function createSubscriptionUsingConfig() public returns (uint256,address) {
         HelperConfig helperConfig = new HelperConfig();
         address vrfCoordinator = helperConfig.getConfig().vrfCoordinator; 
-        createSubscription(vrfCoordinator);
+        (uint256 subId,) = createSubscription(vrfCoordinator);
         return (subId,vrfCoordinator);  
     }
 
