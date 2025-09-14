@@ -25,7 +25,8 @@ contract CreateSubscription is Script {
         return (subId,vrfCoordinator);
     }
 
-    function run() external returns (uint256) {
-        return createSubscriptionUsingConfig(); 
+    function run() external returns (uint256, address) {
+        // return createSubscriptionUsingConfig(); 
+        return (subscriptionId, vrfCoordinator); // Must return 2 values
     }
 }
