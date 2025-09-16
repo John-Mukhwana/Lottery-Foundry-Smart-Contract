@@ -32,4 +32,5 @@ contract CreateSubscription is Script {
 
 contract FudSubscription is Script{
     
+    function run()public{}
 }
