@@ -39,6 +39,8 @@ contract FundSubscription is Script{
         address linkToken = helperConfig.getConfig().link;
         fundSubscription(vrfCoordinator,subscriptionId,linkToken);
     }
-    function fundSubscription(address vrfCoordinator, uint256 subscriptionId, address linkToken) publi
+    function fundSubscription(address vrfCoordinator, uint256 subscriptionId, address linkToken) public{
+        
+    }
     function run()public{}
 }
