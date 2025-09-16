@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.19;
+pragma solidity ^0.8.19;
 
 import {Script} from "forge-std/Script.sol";
 import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
@@ -61,7 +61,7 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: 0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE,
                 gasLane: 0x9e1344a1247c8a1785d0a4681a27152bffdb43666ae5bf7d14d24a5efd44bf71,
                 callbackGasLimit: 500000,
-                subscriptionId: 0
+                subscriptionId: 0,
                 link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
             });
     }
