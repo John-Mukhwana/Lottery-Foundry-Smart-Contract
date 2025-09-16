@@ -30,12 +30,13 @@ contract CreateSubscription is Script {
     }
 }
 
-contract FudSubscription is Script{
+contract FundSubscription is Script{
     uint256 public constant FUND_AMOUNT = 3 ether; //3 Link
     function fundSubscription() public{
         HelperConfig helperConfig = new HelperConfig();
         address vrfCoordinator = helperConfig.getConfig().vrfCoordinator; 
-        (uint256 subId,) = createSubscription(vrfCoordinator);
+        uint256 subscriptionId = helperConfig.getConfig().subscriptionId;
+        address linkToken = 
     }
     function run()public{}
 }
