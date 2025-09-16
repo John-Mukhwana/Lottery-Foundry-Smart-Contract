@@ -25,7 +25,11 @@ contract CreateSubscription is Script {
         return (subId,vrfCoordinator);
     }
 
-    function run() external returns (uint256, address) {
+    function run() public {
         return createSubscriptionUsingConfig(); 
     }
+}
+
+contract FudSubscription is Script{
+    
 }
