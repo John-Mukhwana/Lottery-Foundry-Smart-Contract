@@ -80,7 +80,9 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: address(0), // Replace with actual address if needed
                 gasLane: "",
                 callbackGasLimit: 500000,
-                subscriptionId: 0
+                subscriptionId: 0,
+                link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
+                
             });
     }
 
@@ -93,6 +95,8 @@ contract HelperConfig is CodeConstants, Script {
                 gasLane: "",
                 callbackGasLimit: 500000,
                 subscriptionId: 0
+                link: address(linkToken)
+
             });
     }
 
