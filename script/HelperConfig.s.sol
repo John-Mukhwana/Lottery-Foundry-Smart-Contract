@@ -63,7 +63,7 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: 0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE,
                 gasLane: 0x9e1344a1247c8a1785d0a4681a27152bffdb43666ae5bf7d14d24a5efd44bf71,
                 callbackGasLimit: 500000,
-                subscriptionId: 0,
+                subscriptionId: 30723913235327204486301140280103809169194192935094592075010729541467125387765,
                 link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
             });
     }
@@ -80,7 +80,7 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: address(0), // Replace with actual address if needed
                 gasLane: "",
                 callbackGasLimit: 500000,
-                subscriptionId: 0,
+                subscriptionId: 30723913235327204486301140280103809169194192935094592075010729541467125387765,
                 link: 0x779877A7B0D9E8603169DdbD7836e478b4624789
                 
             });
@@ -94,7 +94,7 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: address(0),
                 gasLane: "",
                 callbackGasLimit: 500000,
-                subscriptionId: 0,
+                subscriptionId: 30723913235327204486301140280103809169194192935094592075010729541467125387765,
                 link: address(linkToken)
 
             });
@@ -123,7 +123,7 @@ contract HelperConfig is CodeConstants, Script {
             vrfCoordinator: address(vrfCoordinatorMock),
             gasLane: "",
             callbackGasLimit: 500000,
-            subscriptionId: 0,
+            subscriptionId: 30723913235327204486301140280103809169194192935094592075010729541467125387765,
             link: address(linkToken)
         });
 
