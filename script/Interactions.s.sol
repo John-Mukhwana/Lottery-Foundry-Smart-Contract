@@ -40,6 +40,9 @@ contract FundSubscription is Script{
         fundSubscription(vrfCoordinator,subscriptionId,linkToken);
     }
     function fundSubscription(address vrfCoordinator, uint256 subscriptionId, address linkToken) public{
+        console.log("Funding subscription :",subscriptionId);
+        console.log("Using VRF Coordinator :",vrfCoordinator);
+        console.log("On chind ID :",block.chainid);
         
     }
     function run()public{}
