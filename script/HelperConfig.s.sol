@@ -94,7 +94,7 @@ contract HelperConfig is CodeConstants, Script {
                 vrfCoordinator: address(0),
                 gasLane: "",
                 callbackGasLimit: 500000,
-                subscriptionId: 0
+                subscriptionId: 0,
                 link: address(linkToken)
 
             });
