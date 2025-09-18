@@ -110,7 +110,7 @@ contract HelperConfig is CodeConstants, Script {
             MOCK_GAS_PRICE_LINK,
             MOCK_WEI_PER_UNIT_LINK   
         );
-        LinkToken link = new LinkToken();
+        LinkToken linkToken = new LinkToken();
         vm.stopBroadcast();
 
         localNetworkConfig = NetworkConfig({
