@@ -2,8 +2,9 @@
 pragma solidity ^0.8.19;
 
 import {Script,console} from "forge-std/Script.sol";
-import {HelperConfig} from "./HelperConfig.s.sol";
+import {HelperConfig, CodeConstants} from "./HelperConfig.s.sol";
 import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+import {LinkToken} from "test/mocks/LinkToken.sol";
 
 contract CreateSubscription is Script {
     function createSubscriptionUsingConfig() public returns (uint256,address) {
@@ -30,7 +31,7 @@ contract CreateSubscription is Script {
     }
 }
 
-contract FundSubscription is Script{
+contract FundSubscription is Script,CodeConstants{
     uint256 public constant FUND_AMOUNT = 3 ether; //3 Link
     function fundSubscription() public{
         HelperConfig helperConfig = new HelperConfig();
@@ -42,7 +43,28 @@ contract FundSubscription is Script{
     function fundSubscription(address vrfCoordinator, uint256 subscriptionId, address linkToken) public{
         console.log("Funding subscription :",subscriptionId);
         console.log("Using VRF Coordinator :",vrfCoordinator);
-        console.log("On chind ID :",block.chainid);
+        console.log("On chain ID :",block.chainid);
+
+        if(block.chainid == LOCAL_CHAIN_ID){
+            //fund using mock
+            vm.startBroadcast();
+            VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(
+                subscriptionId,
+                FUND_AMOUNT
+            );
+            vm.stopBroadcast();
+            console.log("Funded with ", FUND_AMOUNT / 1e18, " LINK");
+        }else{
+            //fund using link token on sepolia
+            vm.startBroadcast();
+            LinkToken(linkToken).transferAndCall(
+                vrfCoordinator,
+                FUND_AMOUNT,
+                abi.encode(subscriptionId)
+            );
+            vm.stopBroadcast();
+            console.log("Funded with ", FUND_AMOUNT / 1e18, " LINK");
+        }
         
     }
     function run()public{}
