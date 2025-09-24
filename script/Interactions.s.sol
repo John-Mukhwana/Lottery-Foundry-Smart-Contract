@@ -74,6 +74,10 @@ contract AddCosumer is Script {
     
     function addConsumer(address raffle,address vrfCoordinator,uint256 subscriptionId) public {
         console.log("Adding consumer contract :",raffle);
+        console.log("Using VRFCoordinator :",vrfCoordinator);
+        console.log("On chain Id :",block.chainid);
+
+        vm.startBroadcast();
         
     }
     function run() external {
