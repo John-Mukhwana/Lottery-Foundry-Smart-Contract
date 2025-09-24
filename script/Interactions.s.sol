@@ -85,8 +85,9 @@ contract AddCosumer is Script {
     function addConsumerUsingConfig(address raffle) public {
         HelperConfig helperConfig = new HelperConfig();
         (,,address vrfCoordinator,uint256 subscriptionId,,)=helperConfig.getConfig();
+        addConsumer(raffle,vrfCoordinator,subscriptionId);
     }
     function run() external {
-        
+        address raffle = D
     }
 }
