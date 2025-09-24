@@ -71,6 +71,11 @@ contract FundSubscription is Script,CodeConstants{
 }
 
 contract AddCosumer is Script {
+    
+    function addConsumer(address raffle,address vrfCoordinator,uint256 subscriptionId) public {
+        console.log("Adding consumer contract :",raffle);
+        
+    }
     function run() external {
         
     }
