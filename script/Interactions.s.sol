@@ -88,6 +88,7 @@ contract AddCosumer is Script {
         addConsumer(raffle,vrfCoordinator,subscriptionId);
     }
     function run() external {
-        address raffle = D
+        address raffle = DevOpsTools.get_most_recent_deployment("MyContract",block.chainid);
+        addConsumerUsingConfig(raffle);
     }
 }
