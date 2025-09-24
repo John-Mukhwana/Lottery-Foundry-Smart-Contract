@@ -45,7 +45,9 @@ contract DeployRaffle is Script {
             config.callbackGasLimit
         );
         vm.stopBroadcast();
-
+        
+        // add consumer
+        AddConsumer addConsumer = new AddConsumer();
         return (raffle, helperConfig);
     }
 }
