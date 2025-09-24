@@ -69,3 +69,9 @@ contract FundSubscription is Script,CodeConstants{
     }
     function run()public{}
 }
+
+contract AddCosumer is Script {
+    function run() external {
+        
+    }
+}
