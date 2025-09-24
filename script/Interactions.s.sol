@@ -78,6 +78,11 @@ contract AddCosumer is Script {
         console.log("On chain Id :",block.chainid);
 
         vm.startBroadcast();
+        VRFCoordinatorV2_5Mock(vrfCoordinator).addConsumer(subscriptionId,raffle);
+        vm.stopBroadcast();
+    }
+
+    function addConsumerUsingConfig(address raffle) public {
         
     }
     function run() external {
