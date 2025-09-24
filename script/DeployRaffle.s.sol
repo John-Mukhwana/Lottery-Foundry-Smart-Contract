@@ -25,6 +25,11 @@ contract DeployRaffle is Script {
             );
             // fund subscription
             FundSubscription fundSubscription = new FundSubscription();
+            fundSubscription(
+                config.vrfCoordinator,
+                config.subscriptionId,
+                config.link
+            );
             // config.subscriptionId = subscriptionId;
 
         }
