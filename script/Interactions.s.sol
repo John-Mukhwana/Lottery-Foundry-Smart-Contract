@@ -70,26 +70,27 @@ contract FundSubscription is Script,CodeConstants{
     }
     function run()public{}
 }
-
-contract AddCosumer is Script {
-    
-    function addConsumer(address raffle,address vrfCoordinator,uint256 subscriptionId) public {
-        console.log("Adding consumer contract :",raffle);
-        console.log("Using VRFCoordinator :",vrfCoordinator);
-        console.log("On chain Id :",block.chainid);
-
-        vm.startBroadcast();
-        VRFCoordinatorV2_5Mock(vrfCoordinator).addConsumer(subscriptionId,raffle);
+contract AddConsumer is Script {
+    function addConsumer(address contractToAddToVrf, address vrfCoordinator, uint256 subId, address account) public {
+        console.log("Adding consumer contract: ", contractToAddToVrf);
+        console.log("Using vrfCoordinator: ", vrfCoordinator);
+        console.log("On ChainID: ", block.chainid);
+        vm.startBroadcast(account);
+        VRFCoordinatorV2_5Mock(vrfCoordinator).addConsumer(subId, contractToAddToVrf);
         vm.stopBroadcast();
     }
 
-    function addConsumerUsingConfig(address raffle) public {
+    function addConsumerUsingConfig(address mostRecentlyDeployed) public {
         HelperConfig helperConfig = new HelperConfig();
-        (,,address vrfCoordinator,uint256 subscriptionId,,)=helperConfig.getConfig();
-        addConsumer(raffle,vrfCoordinator,subscriptionId);
+        uint256 subId = helperConfig.getConfig().subscriptionId;
+        address vrfCoordinatorV2_5 = helperConfig.getConfig().vrfCoordinatorV2_5;
+        address account = helperConfig.getConfig().account;
+
+        addConsumer(mostRecentlyDeployed, vrfCoordinatorV2_5, subId, account);
     }
+
     function run() external {
-        address raffle = DevOpsTools.get_most_recent_deployment("MyContract",block.chainid);
-        addConsumerUsingConfig(raffle);
+        address mostRecentlyDeployed = DevOpsTools.get_most_recent_deployment("Raffle", block.chainid);
+        addConsumerUsingConfig(mostRecentlyDeployed);
     }
 }
