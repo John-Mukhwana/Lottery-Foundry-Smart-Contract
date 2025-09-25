@@ -170,5 +170,18 @@ function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public raffleEnt
 
       //FULFILLRANDOM WORDS//
 
-    function testFul
+    function testFulfillRandomWordsCanOnlyBeCalledAfterPerformUpkeep()
+    public
+    RaffleEntered
+{
+    // Arrange
+    // Act / Assert
+    vm.expectRevert("nonexistent request");
+    // vm.mockCall could be used here...
+    VRFCoordinatorV2_5Mock(vrfCoordinator).fulfillRandomWords(
+        0,
+        address(raffle)
+    );
+​
+}
 }
