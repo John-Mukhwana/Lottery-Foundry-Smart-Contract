@@ -182,6 +182,17 @@ function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public raffleEnt
         randomRequestId,
         address(raffle)
     );
-
+}
+function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEnteredAndTimePassed {
+    // Arrange
+​
+    uint256 additionalEntrants = 3;
+    uint256 startingIndex = 1;
+​
+    for (uint256 i = startingIndex; i < startingIndex + additionalEntrants; i++) {
+        address player = address(uint160(i));
+        hoax(player, 1 ether);
+        raffle.enterRaffle{value: entranceFee}();
+    }
 }
 }
