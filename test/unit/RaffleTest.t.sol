@@ -185,14 +185,41 @@ function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public raffleEnt
 }
 function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEnteredAndTimePassed {
     // Arrange
-​
+
     uint256 additionalEntrants = 3;
     uint256 startingIndex = 1;
-​
+    address 
+
     for (uint256 i = startingIndex; i < startingIndex + additionalEntrants; i++) {
         address player = address(uint160(i));
         hoax(player, 1 ether);
         raffle.enterRaffle{value: entranceFee}();
     }
+    uint256 startingTimeStamp=raffle.getLastTimeStamp();
+
+    //Act
+    vm.recordLogs();
+    raffle.performUpkeep(""); // emits requestId
+    Vm.Log[] memory entries = vm.getRecordedLogs();
+    bytes32 requestId = entries[1].topics[1];
+
+    // Pretend to be Chainlink VRF
+    VRFCoordinatorV2_5Mock(vrfCoordinator).fulfillRandomWords(
+        uint256(requestId),
+        address(raffle)
+    );
+
+    //assert
+        // Assert
+    address recentWinner = raffle.getRecentWinner();
+    Raffle.RaffleState raffleState = raffle.getRaffleState();
+    uint256 winnerBalance = recentWinner.balance;
+    uint256 endingTimeStamp = raffle.getLastTimeStamp();
+    uint256 prize = entranceFee * (additionalEntrants + 1);
+
+    assert(expectedWinner == recentWinner);
+    assert(uint256(raffleState) == 0);
+    assert(winnerBalance == winnerStartingBalance + prize);
+    assert(endingTimeStamp > startingTimeStamp);
 }
 }
