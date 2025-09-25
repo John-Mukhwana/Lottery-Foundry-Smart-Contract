@@ -36,7 +36,7 @@ contract DeployRaffle is Script {
 
         }
 
-        vm.startBroadcast();
+        vm.startBroadcast(config.account);
 
         Raffle raffle = new Raffle(
             config.entranceFee,

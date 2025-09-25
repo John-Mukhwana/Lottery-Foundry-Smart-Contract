@@ -15,7 +15,7 @@ contract CreateSubscription is Script {
         return (subId,vrfCoordinator);  
     }
 
-    function createSubscription(address vrfCoordinator) public returns (uint256,address) {
+    function createSubscription(address vrfCoordinator,address account) public returns (uint256,address) {
         //create subscription
         console.log("Creating subscription on chain ID: ", block.chainid);
         vm.startBroadcast();
@@ -48,7 +48,7 @@ contract FundSubscription is Script,CodeConstants{
 
         if(block.chainid == LOCAL_CHAIN_ID){
             //fund using mock
-            vm.startBroadcast();
+            vm.startBroadcast(co);
             VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(
                 subscriptionId,
                 FUND_AMOUNT*100
