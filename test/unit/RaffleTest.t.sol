@@ -188,7 +188,7 @@ function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEn
 
     uint256 additionalEntrants = 3;
     uint256 startingIndex = 1;
-    address 
+    address expectedWinner = address(1);
 
     for (uint256 i = startingIndex; i < startingIndex + additionalEntrants; i++) {
         address player = address(uint160(i));
@@ -196,6 +196,7 @@ function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEn
         raffle.enterRaffle{value: entranceFee}();
     }
     uint256 startingTimeStamp=raffle.getLastTimeStamp();
+    uint256 
 
     //Act
     vm.recordLogs();
