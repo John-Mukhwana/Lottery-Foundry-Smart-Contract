@@ -196,7 +196,7 @@ function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEn
         raffle.enterRaffle{value: entranceFee}();
     }
     uint256 startingTimeStamp=raffle.getLastTimeStamp();
-    uint256 
+    uint256 WinnerStartingBalance = expectedWinner.balance;
 
     //Act
     vm.recordLogs();
