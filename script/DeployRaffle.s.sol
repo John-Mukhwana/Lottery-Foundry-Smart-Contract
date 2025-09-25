@@ -24,13 +24,15 @@ contract DeployRaffle is Script {
             CreateSubscription createSubscription = new CreateSubscription();
             (config.subscriptionId,config.vrfCoordinator) = createSubscription.createSubscription(
                 config.vrfCoordinator
+                onig.account
             );
             // fund subscription
             FundSubscription fundSubscription = new FundSubscription();
             fundSubscription(
                 config.vrfCoordinator,
                 config.subscriptionId,
-                config.link
+                config.link,
+                config.account
             );
             // config.subscriptionId = subscriptionId;
 
@@ -53,7 +55,8 @@ contract DeployRaffle is Script {
         addConsumer.addConsumer(
             config.vrfCoordinator,
             config.subscriptionId,
-            address(raffle)
+            address(raffle),
+            config.account
         );
         return (raffle, helperConfig);
     }

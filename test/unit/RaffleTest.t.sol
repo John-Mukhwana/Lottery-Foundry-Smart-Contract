@@ -8,8 +8,9 @@ import {Raffle} from "src/Raffle.sol";
 import {HelperConfig} from "script/HelperConfig.s.sol";
 import {Vm} from "forge-std/Vm.sol";
 import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
+import {CodeConstants} from "script/HelperConfig.s.sol";
 
-contract RaffleTest is Test {
+contract RaffleTest is CodeConstants,Test {
     Raffle public raffle;
     HelperConfig public helperConfig;
 
@@ -170,9 +171,17 @@ function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public raffleEnt
 
       //FULFILLRANDOM WORDS//
 
+      modifier skipFork(){
+        if(block.chainid != LOCAL_CHAIN_ID){
+            return;
+        }
+        _;
+      }
+
     function testFulfillRandomWordsCanOnlyBeCalledAfterPerformUpkeep(uint256 randomRequestId)
     public
     RaffleEntered
+    skipFork
 {
     // Arrange
     // Act / Assert
@@ -183,7 +192,7 @@ function testPerformUpkeepUpdatesRaffleStateAndEmitsRequestId() public raffleEnt
         address(raffle)
     );
 }
-function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEnteredAndTimePassed {
+function testFulfillRandomWordsPicksAWinnerResetsAndSendsMoney() public raffleEntered skipFork {
     // Arrange
 
     uint256 additionalEntrants = 3;
